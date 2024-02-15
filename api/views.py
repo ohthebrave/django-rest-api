@@ -3,15 +3,15 @@ from api.models import Farmer
 from api.serializers import FarmerSerializer
 
 # Create your views here.
-class FarmerMixinView(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin,generics.GenericAPIView):
-
+class FarmerCreateAPIView(generics.CreateAPIView):
     queryset = Farmer.objects.all()
     serializer_class = FarmerSerializer
-    lookup_field = 'pk'
 
-    def get(self, request, *args, **kwargs):
-        print(args, kwargs)
-        pk = kwargs.get("pk")
+farmer_create_view = FarmerCreateAPIView.as_view()
 
+class FarmerDetailApiView(generics.RetrieveAPIView):
+    queryset = Farmer.objects.all()
+    serializer_class = FarmerSerializer
+    # lookup_field= 'pk'
 
-farmer_mixin_view = FarmerMixinView.as_view()
+farmer_mixin_view = FarmerDetailApiView.as_view()
