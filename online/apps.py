@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FarmerConfig(AppConfig):
+class OnlineConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "farmer"
+    name = "online"

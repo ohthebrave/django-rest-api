@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-AUTH_USER_MODEL = 'farmer.USER'
+AUTH_USER_MODEL = 'online.User'
 
 # Application definition
 
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "farmer",
+    "online",
 ]
 
 
