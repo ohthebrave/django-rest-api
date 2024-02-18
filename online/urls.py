@@ -7,4 +7,5 @@ urlpatterns = [
     path("docs/<int:pk>/", views.user_detail_view),
     path("patients/", views.patient_list_view),
     path("doctors/", views.doctor_list_view),
+    path("login/", views.login_view),
 ]
