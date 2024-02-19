@@ -5,11 +5,12 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError, AuthenticationFailed
+import jwt, datetime
 
 
 # Create your views here.
 def home(request):
-    return HttpResponse("Hello World")
+    return HttpResponse("Hello World, Welcome to my application")
 
 class UserListAPIView(generics.ListAPIView):
     queryset = User.objects.all()
@@ -63,8 +64,37 @@ class LoginView(generics.CreateAPIView):
             raise AuthenticationFailed('Invalid user')
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
-        return Response({
-            'message': 'Success'
-        })
+        
+        payload = {
+            'id': user.id,
+            'name': user.username,
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+            'iat': datetime.datetime.utcnow()
+        }
+
+        token = jwt.encode(payload, 'secret', algorithm='HS256')
+        response = Response()
+        response.set_cookie(key='jwt', value=token, httponly=True)
+
+        response.data = {
+            'jwt': token
+        }
+
+
+        return response
     
 login_view= LoginView.as_view()
+
+
+class LogoutView(generics.CreateAPIView):
+    def post(self, request):
+        response = Response()
+        response.delete_cookie('jwt')
+        response.data = {
+            'message': 'success'
+        }
+        return response
+    
+
+logout_view = LogoutView.as_view()
+
