@@ -1,4 +1,4 @@
-from online.models import User
+from online.models import User, Animal, Category
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -16,3 +16,16 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+    
+
+class AnimalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Animal
+        fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Category
+        fields = ['id', 'name']
+

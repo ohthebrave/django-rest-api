@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from online.models import User
-from online.serializers import UserSerializer
+from online.models import User, Animal, Category
+from online.serializers import UserSerializer, AnimalSerializer, CategorySerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -98,3 +98,18 @@ class LogoutView(generics.CreateAPIView):
 
 logout_view = LogoutView.as_view()
 
+class AnimalListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Animal.objects.all()
+    serializer_class = AnimalSerializer
+    # permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(farmer=self.request.user) 
+         
+
+animal_list_view=AnimalListCreateAPIView.as_view()
+
+
+# class CategoryListCreateAPIView(generics.ListCreateAPIView):
+#     queryset = Animal.objects.all()
+#     serializer_class = AnimalSerializer

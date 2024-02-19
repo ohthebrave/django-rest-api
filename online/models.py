@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.utils import timezone
 
 # Create your models here.
 class User(AbstractUser):
@@ -11,3 +11,20 @@ class User(AbstractUser):
 
 	USERNAME_FIELD= 'email'
 	REQUIRED_FIELDS= []
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    
+
+class Animal(models.Model):
+    breed = models.CharField(max_length=50)
+    image = models.ImageField(default='default.jpg', upload_to='animal_pics')
+    age = models.PositiveIntegerField()
+    weight = models.DecimalField(max_digits=10, decimal_places=1, default=99.9)
+    description = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=99.99)
+    farmer = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
