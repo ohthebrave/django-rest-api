@@ -110,6 +110,8 @@ class AnimalListCreateAPIView(generics.ListCreateAPIView):
 animal_list_view=AnimalListCreateAPIView.as_view()
 
 
-# class CategoryListCreateAPIView(generics.ListCreateAPIView):
-#     queryset = Animal.objects.all()
-#     serializer_class = AnimalSerializer
+class CategoryListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+category_list = CategoryListCreateAPIView.as_view()
