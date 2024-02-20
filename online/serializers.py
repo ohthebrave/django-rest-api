@@ -18,14 +18,25 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
     
 
-class AnimalSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Animal
-        fields = '__all__'
-
-
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model= Category
         fields = ['id', 'name']
+
+
+class AnimalSerializer(serializers.ModelSerializer):
+    farmer_username = serializers.SerializerMethodField()
+    category_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Animal
+        fields = ['id', 'breed', 'age', 'weight', 'price', 'farmer_id', 'farmer_username', 'category_id', 'category_name']
+
+    def get_farmer_username(self, obj):
+        return obj.farmer.username
+    
+    def get_category_name(self, obj):
+        return obj.category.name
+
+
 
