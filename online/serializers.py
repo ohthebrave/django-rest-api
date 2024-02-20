@@ -4,7 +4,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = [ 'id', 'username', 'email', 'password', ]
+        fields = [ 'id', 'username', 'email', 'password',]
         extra_kwargs= {
             'password': {'write_only': True}
         }
@@ -30,7 +30,7 @@ class AnimalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Animal
-        fields = ['id', 'breed', 'age', 'image_url','description', "date_posted",'weight', 'price', 'farmer_id', 'farmer_username', 'category_id', 'category_name']
+        fields = ['id', 'breed', 'age', 'image_url','description', "date_posted",'weight', 'price',  'farmer_username',  'category_name']
 
     def get_farmer_username(self, obj):
         return obj.farmer.username

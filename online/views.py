@@ -38,9 +38,9 @@ class PatientListCreateAPIView(generics.ListCreateAPIView):
         serializer.save(is_patient=True) 
          
 
-patient_list_view=PatientListCreateAPIView.as_view()
+farmer_list_view=PatientListCreateAPIView.as_view()
 
-class DoctorListView(generics.ListAPIView):
+class DoctorListCreateView(generics.ListCreateAPIView):
     queryset = User.objects.filter(is_doctor=True)
     serializer_class = UserSerializer
     
@@ -50,7 +50,7 @@ class DoctorListView(generics.ListAPIView):
             raise ValidationError("Email already exists")
         serializer.save(is_doctor=True)
 
-doctor_list_view= DoctorListView.as_view()
+customer_list_view= DoctorListCreateView.as_view()
 
 
 class LoginView(generics.CreateAPIView):
