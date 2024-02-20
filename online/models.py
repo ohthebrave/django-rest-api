@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class Animal(models.Model):
     breed = models.CharField(max_length=50)
-    image = models.ImageField(default='default.jpg', upload_to='animal_pics')
+    image_url = models.URLField(max_length=350)
     age = models.PositiveIntegerField()
     weight = models.DecimalField(max_digits=10, decimal_places=1, default=99.9)
     description = models.TextField()
