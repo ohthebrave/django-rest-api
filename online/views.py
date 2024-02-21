@@ -26,31 +26,27 @@ class UserDetailAPIView(generics.RetrieveAPIView):
 user_detail_view = UserDetailAPIView.as_view()
 
 
-class PatientListCreateAPIView(generics.ListCreateAPIView):
-    queryset = User.objects.filter(is_patient=True)
+class PatientCreateAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
-    # permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         email =serializer.validated_data.get('email')
+        role = self.request.data.get('role')
         if User.objects.filter(email=email).exists():
             raise ValidationError("Email already exists")
-        serializer.save(is_patient=True) 
+        # Set the user role based on the data received
+        if role == 'patient':
+            serializer.save(is_patient=True)
+        elif role == 'admin':
+            serializer.save(is_admin=True)
+        elif role == 'doctor':
+            serializer.save(is_doctor=True)
+        else:
+            raise ValidationError("Invalid user role") 
          
 
-farmer_list_view=PatientListCreateAPIView.as_view()
+farmer_list_view=PatientCreateAPIView.as_view()
 
-class DoctorListCreateView(generics.ListCreateAPIView):
-    queryset = User.objects.filter(is_doctor=True)
-    serializer_class = UserSerializer
-    
-    def perform_create(self, serializer):
-        email =serializer.validated_data.get('email')
-        if User.objects.filter(email=email).exists():
-            raise ValidationError("Email already exists")
-        serializer.save(is_doctor=True)
-
-customer_list_view= DoctorListCreateView.as_view()
 
 
 class LoginView(generics.CreateAPIView):
@@ -65,9 +61,13 @@ class LoginView(generics.CreateAPIView):
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
         
+        # Determine the user's role (e.g., based on a field in the User model)
+        role = 'patient' if user.is_patient else 'admin' if user.is_admin else 'doctor'
+        
         payload = {
             'id': user.id,
             'name': user.username,
+            'role': role,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
             'iat': datetime.datetime.utcnow()
         }
@@ -77,7 +77,8 @@ class LoginView(generics.CreateAPIView):
         response.set_cookie(key='jwt', value=token, httponly=True)
 
         response.data = {
-            'jwt': token
+            'jwt': token,
+            'role': role
         }
 
 
