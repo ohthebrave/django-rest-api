@@ -10,4 +10,5 @@ urlpatterns = [
     path("logout/", views.logout_view),
     path("animals/", views.animal_list_view),
     path("categories/", views.category_list),
+    path("cart/", views.cart_list),
 ]

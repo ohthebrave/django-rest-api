@@ -1,4 +1,4 @@
-from online.models import User, Animal, Category
+from online.models import *
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -25,18 +25,26 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class AnimalSerializer(serializers.ModelSerializer):
-    farmer_username = serializers.SerializerMethodField()
-    category_name = serializers.SerializerMethodField()
+
 
     class Meta:
         model = Animal
-        fields = ['id', 'breed', 'age', 'image_url','description', "date_posted",'weight', 'price',  'farmer_username',  'category_name']
-
-    def get_farmer_username(self, obj):
-        return obj.farmer.username
-    
-    def get_category_name(self, obj):
-        return obj.category.name
+        fields = '__all__'
 
 
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
 

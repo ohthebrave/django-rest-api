@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 from online.models import User, Animal, Category
-from online.serializers import UserSerializer, AnimalSerializer, CategorySerializer
+from online.serializers import *
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError, AuthenticationFailed
 import jwt, datetime
+from rest_framework import permissions
 
 
 # Create your views here.
@@ -105,7 +106,10 @@ class AnimalListCreateAPIView(generics.ListCreateAPIView):
     # permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(farmer=self.request.user) 
+        print(self.request.data)
+        user_id = self.request.data.get('farmer')
+        user = User.objects.filter(id=user_id).first()
+        serializer.save(farmer=user) 
          
 
 animal_list_view=AnimalListCreateAPIView.as_view()
@@ -116,3 +120,25 @@ class CategoryListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
 
 category_list = CategoryListCreateAPIView.as_view()
+
+
+class CartCreateAPIView(generics.CreateAPIView):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+cart_list = CartCreateAPIView.as_view()
+
+
+class OrderCreateAPIView(generics.CreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class OrderItemCreateAPIView(generics.CreateAPIView):
+    queryset = OrderItem.objects.all()
+    serializer_class = OrderItemSerializer
