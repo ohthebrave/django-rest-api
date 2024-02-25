@@ -11,4 +11,5 @@ urlpatterns = [
     path("animals/", views.animal_list_view),
     path("categories/", views.category_list),
     path("cart/", views.cart_list),
+    path('stk/', views.stk_push, name='stk_push'),
 ]

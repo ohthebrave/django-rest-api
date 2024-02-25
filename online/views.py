@@ -7,6 +7,42 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError, AuthenticationFailed
 import jwt, datetime
 from rest_framework import permissions
+import requests
+import json
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+
+
+# Decorator to exempt CSRF protection for this view
+@csrf_exempt  
+def stk_push(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(data)
+
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer FtBNDqAxpaZLRm68FRnvlBvJpCHU'
+        }
+
+        payload = {
+            "BusinessShortCode": 174379,
+            "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjQwMjI1MTUzNjU4",
+            "Timestamp": "20240225153658",
+            "TransactionType": "CustomerPayBillOnline",
+            "Amount": data['amount'],
+            "PartyA": data['phoneNumber'],
+            "PartyB": 174379,
+            "PhoneNumber": data['phoneNumber'],
+            "CallBackURL": "https://mydomain.com/path",
+            "AccountReference": "CompanyXLTD",
+            "TransactionDesc": "Payment of X" 
+        }
+
+        response = requests.post('https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers=headers, json=payload)
+        print(response.text.encode('utf8'))
+
+        return JsonResponse({'message': 'Request processed successfully'})  
 
 
 # Create your views here.
