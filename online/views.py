@@ -18,11 +18,11 @@ from django.http import JsonResponse
 def stk_push(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
+        # print(data)
 
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer FtBNDqAxpaZLRm68FRnvlBvJpCHU'
+            'Authorization': 'Bearer qfczMmMJpaadVn6hx5ZSzXvcBJwh',
         }
 
         payload = {
