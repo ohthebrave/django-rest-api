@@ -53,10 +53,10 @@ class Cart(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     paid_amount = models.FloatField(default=0)
     date_order = models.DateTimeField(auto_now_add=True)
-    complete = models.BooleanField(default=False)
+    status = models.BooleanField(default=False)
     contact_number= models.CharField(max_length=20)
     street = models.CharField(max_length=200)
     city = models.CharField(max_length=200)

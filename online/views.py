@@ -18,11 +18,11 @@ from django.http import JsonResponse
 def stk_push(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        # print(data)
+        print(data)
 
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer qfczMmMJpaadVn6hx5ZSzXvcBJwh',
+            'Authorization': 'Bearer YIGEBnWHASpA34eMkSPOJVcX4OAI',
         }
 
         payload = {
@@ -163,10 +163,23 @@ class CartCreateAPIView(generics.CreateAPIView):
     serializer_class = CartSerializer
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        print(self.request.data)
+        user_id = self.request.data.get('user')
+        customer = User.objects.filter(id=user_id).first()
+        serializer.save(user=customer)
 
 cart_list = CartCreateAPIView.as_view()
 
+class FarmerAnimalListView(generics.ListAPIView):
+    serializer_class = AnimalSerializer
+    # permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        print(self.request.user)
+        # Retrieve animals posted by the currently logged-in farmer
+        return Animal.objects.filter(farmer=self.request.user)
+
+filtered_animal = FarmerAnimalListView.as_view()
 
 class OrderCreateAPIView(generics.CreateAPIView):
     queryset = Order.objects.all()
@@ -174,6 +187,9 @@ class OrderCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+order_create = OrderCreateAPIView.as_view()
+
 
 class OrderItemCreateAPIView(generics.CreateAPIView):
     queryset = OrderItem.objects.all()
