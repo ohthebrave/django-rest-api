@@ -172,7 +172,7 @@ cart_list = CartCreateAPIView.as_view()
 
 class FarmerAnimalListView(generics.ListAPIView):
     serializer_class = AnimalSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         print(self.request.user)
