@@ -1,0 +1,44 @@
+.add-to-cart-btn {
+    background-color: #f5610d;
+    color: #fff;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: rgba(187, 83, 22, 0.918);
+    color: #fff;
+  }
+  
+  .img-box {
+    height: 330px;
+    border-radius: 10px;
+  }
+  
+  .modal-dialog {
+    max-width: 800px;
+  }
+  
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top-columns {
+    display: flex;
+  }
+  
+  .animal-image {
+    flex: 0 0 40%;
+  }
+  
+  .animal-details {
+    flex: 1;
+    padding-left: 20px; /* Add some space between image and details */
+  }
+  
+  .animal-description {
+    margin-top: 20px;
+  }

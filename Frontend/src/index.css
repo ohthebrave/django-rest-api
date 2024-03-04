@@ -1,0 +1,97 @@
+
+
+.navbar {
+  background-color: rgb(87, 105, 77);
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+.navbar h4 {
+  color: orange;
+}
+
+.end a {
+  color: white;
+  text-decoration: none;
+  margin: 10px;
+}
+.end a:hover {
+  color: #e47907;
+}
+
+.search-bar{
+  background-color: rgb(87, 105, 77);
+}
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+.signup {
+  margin-top: 10em;
+}
+.signup form{
+  width: 50%;
+
+}
+.nav-item{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.product-image{
+  margin-top: 10px;
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
+}
+div.polaroid {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 25px;
+  margin-left: 70px;
+}
+div.title {
+  margin: 5px;
+  padding: 5px 10px;
+}
+.shopTitle {
+  margin: 30px;
+  text-align: center;
+  font-size: 40px;
+}
+.addToCartBttn {
+  background-color: transparent;
+  border: 2px solid rgb(19, 19, 19);
+  min-width: 100px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
+
+.addToCartBttn:hover {
+  background-color: rgb(19, 19, 19);
+  color: white;
+  cursor: pointer;
+}
+
+.checkout {
+  border: 2px solid red;
+  margin: 30px;
+}
+
+.checkout form {
+  margin: 20px;
+  margin-bottom: 30px;
+}
+
+.dunyu{
+ 
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: 100vh;
+}

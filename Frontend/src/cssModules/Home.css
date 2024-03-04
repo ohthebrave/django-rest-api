@@ -1,0 +1,71 @@
+body {
+  background-color: white;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero p {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 40px;
+  text-shadow: 2px 2px 0px hsl(0, 0%, 11%);
+}
+
+.bg-img {
+  background-image: url("https://images.pexels.com/photos/422218/pexels-photo-422218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  height: 80vh;
+  margin-top: 0px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.sign-in-btn {
+  background-color: #f5610d;
+  color: #fff;
+  font-size: 1.4rem;
+  width: 150px;
+  border-radius: 10px;
+  border: none;
+  transition: transform 0.2s ease;
+  height: 50px;
+  margin-top: 40px;
+}
+
+.sign-in-btn:hover {
+  background-color: #f5610d;
+  transform: scale(1.1);
+}
+
+.heading-2 {
+  text-align: center;
+  color: #f5610d;
+  text-align: center;
+}
+
+.testimonial-section {
+  background-color: #404040;
+}
+
+.testimonial-section h2 {
+  color: #fff;
+  text-align: center;
+}
+
+.card-img {
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dev-links a {
+  color: white;
+  margin: 10px;
+}

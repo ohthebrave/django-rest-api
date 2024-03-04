@@ -1,0 +1,20 @@
+.heading-2 {
+  text-align: center;
+  color: #f5610d;
+  text-align: center;
+}
+.filter-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.filterbybreed {
+  height: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.filterbyage {
+  height: 30px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}

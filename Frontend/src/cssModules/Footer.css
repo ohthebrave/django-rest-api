@@ -1,0 +1,11 @@
+.footer-socials {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-socials a {
+  margin: 0 10px;
+  color: azure;
+}
+
+
